@@ -80,7 +80,7 @@ export default function AppRed() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
     const handleMessage = (event) => {
@@ -505,7 +505,7 @@ export default function AppRed() {
           >
             <iframe
               id="vimeo-iframe"
-              src="https://player.vimeo.com/video/1201303109?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=0&api=1"
+              src="https://player.vimeo.com/video/1201303109?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1&api=1"
               title="Mira en vivo como creamos una carta digital"
               style={{
                 position: 'absolute',
@@ -518,6 +518,50 @@ export default function AppRed() {
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
             ></iframe>
+
+            {/* Botón flotante central para activar el sonido */}
+            {isMuted && (
+              <button
+                onClick={handleMuteUnmute}
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  background: 'rgba(0, 0, 0, 0.85)',
+                  backdropFilter: 'blur(8px)',
+                  border: '2px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '9999px',
+                  padding: '16px 28px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  color: '#ffffff',
+                  fontWeight: '700',
+                  fontSize: '1.1rem',
+                  cursor: 'pointer',
+                  zIndex: 10,
+                  animation: 'pulse-ring 2s infinite ease-in-out',
+                  transition: 'transform 0.2s ease, background-color 0.2s ease',
+                  pointerEvents: 'auto'
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.95)'; e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.05)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.85)'; e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)'; }}
+                title="Activar Sonido"
+              >
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  borderRadius: '50%',
+                  padding: '8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <VolumeX size={22} />
+                </div>
+                Activar Sonido
+              </button>
+            )}
 
             {/* Custom Overlay Controls */}
             <div 
