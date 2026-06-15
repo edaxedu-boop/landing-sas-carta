@@ -158,6 +158,15 @@ export default function AppRed() {
     }
   };
   
+  const handleConversionClick = () => {
+    if (window.fbq) {
+      window.fbq('track', 'Lead', {
+        value: 9.00,
+        currency: 'PEN'
+      });
+    }
+  };
+
   // Carousel State
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -450,7 +459,7 @@ export default function AppRed() {
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center', marginBottom: '60px' }}>
-            <a href={ENLACE_CREACION} target="_blank" rel="noopener noreferrer" className="btn-primary animate-pulse-glow">
+            <a href={ENLACE_CREACION} onClick={handleConversionClick} target="_blank" rel="noopener noreferrer" className="btn-primary animate-pulse-glow">
               <Sparkles size={20} />
               Crear mi Carta Digital Ahora
             </a>
@@ -649,6 +658,7 @@ export default function AppRed() {
           <div style={{ marginTop: '32px', display: 'flex', justifyContent: 'center' }}>
             <a 
               href={ENLACE_CREACION}
+              onClick={handleConversionClick}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary animate-pulse-glow"
@@ -1002,7 +1012,7 @@ export default function AppRed() {
                 </div>
               </div>
 
-              <a href={ENLACE_CREACION} target="_blank" rel="noopener noreferrer" className="btn-primary animate-pulse-glow" style={{ width: '100%', justifyContent: 'center', padding: '18px 24px' }}>
+              <a href={ENLACE_CREACION} onClick={handleConversionClick} target="_blank" rel="noopener noreferrer" className="btn-primary animate-pulse-glow" style={{ width: '100%', justifyContent: 'center', padding: '18px 24px' }}>
                 <Sparkles size={20} />
                 Crear Mi Carta Digital por S/ 9/mes
               </a>
@@ -1054,7 +1064,7 @@ export default function AppRed() {
           <h4 style={{ color: '#ffffff', margin: 0, fontSize: '1rem', fontWeight: '700' }}>Carta Digital e Instalable PWA</h4>
           <p style={{ color: '#fecdd3', margin: 0, fontSize: '0.8rem' }}>Platos ilimitados al WhatsApp por solo <strong>S/ 9 al mes</strong></p>
         </div>
-        <a href={ENLACE_CREACION} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.95rem' }}>
+        <a href={ENLACE_CREACION} onClick={handleConversionClick} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.95rem' }}>
           Crear Carta Ahora
           <ArrowRight size={16} />
         </a>
