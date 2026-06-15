@@ -81,7 +81,7 @@ export default function App() {
   const [stickyVisible, setStickyVisible] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
@@ -139,6 +139,11 @@ export default function App() {
         value: nextMuted
       }), '*');
       setIsMuted(nextMuted);
+
+      if (!nextMuted && !isPlaying) {
+        iframe.contentWindow.postMessage(JSON.stringify({ method: 'play' }), '*');
+        setIsPlaying(true);
+      }
     }
   };
 
@@ -507,7 +512,7 @@ export default function App() {
           >
             <iframe
               id="vimeo-iframe"
-              src="https://player.vimeo.com/video/1201303109?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1&api=1"
+              src="https://player.vimeo.com/video/1201303109?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=0&loop=1&title=0&byline=0&portrait=0&controls=0&muted=1&api=1"
               title="Mira en vivo como creamos una carta digital"
               style={{
                 position: 'absolute',
@@ -521,7 +526,7 @@ export default function App() {
               allowFullScreen
             ></iframe>
 
-            {/* Botón flotante central para activar el sonido */}
+            {/* Botón flotante central para activar el sonido y reproducir */}
             {isMuted && (
               <button
                 onClick={handleMuteUnmute}
@@ -549,7 +554,7 @@ export default function App() {
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.95)'; e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1.05)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(0, 0, 0, 0.85)'; e.currentTarget.style.transform = 'translate(-50%, -50%) scale(1)'; }}
-                title="Activar Sonido"
+                title="Reproducir con Sonido"
               >
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.15)',
@@ -559,9 +564,9 @@ export default function App() {
                   alignItems: 'center',
                   justifyContent: 'center'
                 }}>
-                  <VolumeX size={22} />
+                  <Play size={20} fill="#ffffff" />
                 </div>
-                Activar Sonido
+                Reproducir con Sonido
               </button>
             )}
 
